@@ -1,0 +1,5 @@
+Package: carolus
+Type: Package
+Title: Handling metabarcoding data from the Swedish IBA and SIMS projects
+Version: 0.0.0dev
+RoxygenNote: 7.3.2
