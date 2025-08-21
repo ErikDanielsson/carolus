@@ -4,8 +4,8 @@
 #' @param program The taxonomy program to select. Supports 'epang', 'sintax' and 'vsearch'. Use NULL for default taxonomy
 #' @return A data frame of the file
 #' @export
-get_asv_taxonomy <- function(country="SE", program=NULL) {
-  if (program == NULL) {
+get_asv_taxonomy <- function(country="SE", program = NULL) {
+  if (is.null(program)) {
     fn_prefix <- "asv_taxonomy" 
   } else if (program %in% c("epang", "sintax", "vsearch")) {
     fn_prefix <- glue("asv_taxonomy_{program}")
@@ -95,16 +95,37 @@ get_noise_filtered_cluster_counts <- function(country="SE") {
     "noise_filtered_cluster_counts", "processed", country = country, format="tsv.gz"
   ))
 }
-# 
-# MANIFEST.txt
-# noise_filtered_cluster_counts_MG.tsv.gz
-# noise_filtered_cluster_counts_SE.tsv.gz
-# noise_filtered_cluster_taxonomy_MG.tsv.gz
-# noise_filtered_cluster_taxonomy_SE.tsv.gz
-# README.txt
-# removed_control_tax_MG.tsv.gz
-# removed_control_tax_SE.tsv.gz
-# shasum.txt
-# spikeins_tax_MG.tsv.gz
-# spikeins_tax_SE.tsv.gz
-# 
+
+#' Get the 'noise_filtered_cluster_taxonomy' files
+#'
+#' @param country The country code. Either 'SE' or 'MG', defaults to 'SE'  
+#' @return A data frame of the file
+#' @export
+get_noise_filtered_cluster_taxonomy <- function(country="SE") {
+  return(get_IBA_file_country(
+    "noise_filtered_cluster_taxonomy", "processed", country = country, format="tsv.gz"
+  ))
+}
+
+#' Get the 'removed_control_tax' files
+#'
+#' @param country The country code. Either 'SE' or 'MG', defaults to 'SE'  
+#' @return A data frame of the file
+#' @export
+get_removed_control_tax <- function(country="SE") {
+  return(get_IBA_file_country(
+    "removed_control_tax", "processed", country = country, format="tsv.gz"
+  ))
+}
+
+#' Get the 'spikeins_tax' files
+#'
+#' @param country The country code. Either 'SE' or 'MG', defaults to 'SE'  
+#' @return A data frame of the file
+#' @export
+get_spikeins_tax <- function(country="SE") {
+  return(get_IBA_file_country(
+    "spikeins_tax", "processed", country = country, format="tsv.gz"
+  ))
+}
+ 

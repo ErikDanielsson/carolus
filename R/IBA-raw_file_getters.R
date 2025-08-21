@@ -49,7 +49,7 @@ get_CO1_sequencing_metadata <- function(country="SE") {
 #' @export
 get_sample_metadata_litter <- function(country="SE") {
   if (country == "SE") {
-    return(get_IBA_data_file("sample_metadata_soil_litter", "raw", arguments = country))
+    return(get_IBA_data_file("samples_metadata_soil_litter", "raw", arguments = country))
   } else if (country == "MG") {
     return(get_IBA_data_file("samples_metadata_litter", "raw", arguments = country))
   } else {
