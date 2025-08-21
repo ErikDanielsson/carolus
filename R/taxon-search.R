@@ -1,4 +1,7 @@
 library(tidyverse)
+library(glue)
+library(fs)
+library(stringr)
 
 #' Search the dataset for a set of taxa
 #'

@@ -1,23 +1,3 @@
-library(arrow)
-#' Get the 'biological_spikes_taxonomy' files
-#'
-#' @param country The country code. Either 'SE' or 'MG', defaults to 'SE'  
-#' @return A data frame of the file
-#' @export
-get_raw_dataset <- function(country="SE") {
-    raw_conns <- list()
-    raw_conns$get_biomass_count <- get_biomass_count()
-    raw_conns$get_CO1_asv_counts <- get_CO1_asv_counts()
-    raw_conns$get_CO1_sequencing_metadata <- get_CO1_sequencing_metadata()
-    raw_conns$get_sample_metadata_litter <- get_sample_metadata_litter()
-    raw_conns$get_samples_metadata_malaise <- get_samples_metadata_malaise()
-    raw_conns$get_sites_metadata <- get_sites_metadata()
-    raw_conns$get_soil_chemistry <- get_soil_chemistry()
-    raw_conns$get_stand_characteristics_MG <- get_stand_characteristics_MG()
-    raw_conns$get_synthetic_spikes_info <- get_synthetic_spikes_info()
-    return(open_dataset(raw_conns))
-} 
-
 #' Get the 'biological_spikes_taxonomy' files
 #'
 #' @param country The country code. Either 'SE' or 'MG', defaults to 'SE'  
