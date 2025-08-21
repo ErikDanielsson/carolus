@@ -4,7 +4,13 @@
 \alias{get_IBA_file_country}
 \title{Get arrow table from a tabular file with country data}
 \usage{
-get_IBA_file_country(fn_prefix, data_source, country = "SE", format = "tsv")
+get_IBA_file_country(
+  fn_prefix,
+  data_source,
+  country = "SE",
+  format = "tsv",
+  ...
+)
 }
 \arguments{
 \item{fn_prefix}{The prefix of the file}

@@ -1,3 +1,27 @@
+library(arrow)
+#' Get the full processed dataset 
+#'
+#' @param country The country code. Either 'SE' or 'MG', defaults to 'SE'  
+#' @return A data frame of the file
+#' @export
+get_processed_dataset <- function(country="SE", program = NULL) {
+# Extremely simple test to see that all
+# functions returns something remotely correct
+  processed_conns = list()
+  processed_conns$get_asv_taxonomy = get_asv_taxonomy()
+  processed_conns$get_cleaned_noise_filtered_cluster_counts = get_cleaned_noise_filtered_cluster_counts()
+  processed_conns$get_cleaned_noise_filtered_cluster_taxonomy = get_cleaned_noise_filtered_cluster_taxonomy()
+  processed_conns$get_cluster_consensus_taxonomy = get_cluster_consensus_taxonomy()
+  processed_conns$get_cluster_counts = get_cluster_counts()
+  processed_conns$get_cluster_taxonomy = get_cluster_taxonomy()
+  processed_conns$get_noise_filtered_cluster_counts = get_noise_filtered_cluster_counts()
+  processed_conns$get_noise_filtered_cluster_taxonomy = get_noise_filtered_cluster_taxonomy()
+  processed_conns$get_removed_control_tax = get_removed_control_tax()
+  processed_conns$get_spikeins_tax = get_spikeins_tax()
+  return(open_dataset(processed_conns))
+}
+
+
 #' Get the 'asv_taxonomy' files
 #'
 #' @param country The country code. Either 'SE' or 'MG', defaults to 'SE'  

@@ -4,7 +4,13 @@
 \alias{get_IBA_data_file}
 \title{Get arrow table from a tabular file}
 \usage{
-get_IBA_data_file(fn_prefix, data_source, arguments = NULL, format = "tsv")
+get_IBA_data_file(
+  fn_prefix,
+  data_source,
+  arguments = NULL,
+  format = "tsv",
+  ...
+)
 }
 \arguments{
 \item{fn_prefix}{The prefix of the file}
