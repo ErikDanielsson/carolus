@@ -6,7 +6,7 @@ library(fs)
 get_arrow_file <- function(csv_fp, cache_relpath, group_by, format="tsv") {
   
   fn <- path_file(csv_fp) 
-  pq_fp <- path(CACHE_DIR, cache_relpath, fn)
+  pq_fp <- path(carolus_dir("cache"), cache_relpath, fn)
   
   if (file.exists(pq_fp)) {
     # Read the cached parquet file

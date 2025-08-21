@@ -15,7 +15,7 @@ library(yaml)
   models = tools::R_user_dir("carolus", which = "config") 
 )
 
-#' Get the config file containing paths to data  
+#' Get the config file containing paths to data
 #'
 #' If no file is found, a default on is created based on the
 #' template '.carolus_default_dirs'
