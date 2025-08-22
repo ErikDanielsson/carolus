@@ -38,7 +38,7 @@ get_IBA_data_file <- function(fn_prefix, data_source, arguments=NULL, format="ts
   
   # Construct the file name and path 
   fn <- glue("{fn_prefix}.{format}")
-  csv_fp <- path(carolus_dir("IBA", data_source), fn) 
+  csv_fp <- path(carolus_dir("data", "IBA", data_source), fn) 
   
   return(get_arrow_file(csv_fp, data_source, ...))
 }
