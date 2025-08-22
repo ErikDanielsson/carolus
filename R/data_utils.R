@@ -1,8 +1,3 @@
-library(tidyverse)
-library(dtplyr)
-library(data.table)
-library(glue)
-library(fs)
 
 # Set up an enviroment so that we can cache the file loads
 pkg.env <- new.env()

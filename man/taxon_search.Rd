@@ -23,12 +23,12 @@ Search the dataset for a set of taxa
 }
 \examples{
 # Search for a single taxon 
-taxon_search(c("Trypoxylon attenuatum"), "Species")
+taxon_search("Trypoxylon attenuatum", "Species")
 
 # Search for a multiple taxa
 taxon_search(c("Astata", "Mellinus", "Trypoxylon"), "Genus")
 
 # Search for lysate samples
-taxon_search(c("Astata boops"), "Species", treatment_type = "lysate")
+taxon_search("Astata boops", "Species", treatment_type = "lysate")
 
 }
