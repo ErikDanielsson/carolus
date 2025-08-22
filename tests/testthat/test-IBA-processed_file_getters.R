@@ -12,10 +12,3 @@ test_that("all functions return", {
   expect_s3_class(get_removed_control_tax(), "ArrowObject")
   expect_s3_class(get_spikeins_tax(), "ArrowObject")
 })
-
-
-
-
-
-
- 

@@ -17,7 +17,7 @@ get_biomass_count <- function(dataset="IBA") {
     message(glue("Dataset '{dataset}' is invalid. Please pick either 'IBA' or 'SIIP'")) 
     return(NA)
   }
-  return(get_IBA_data_file("biomass_count", "raw", arguments = dataset, format="tsv"))
+  return(get_IBA_data_file("biomass_count", "raw", arguments = dataset, format="tsv", dec=","))
 }
 
 #' Get the 'CO1_asv_counts' files
@@ -64,7 +64,7 @@ get_sample_metadata_litter <- function(country="SE") {
 #' @return A data frame of the file
 #' @export
 get_samples_metadata_malaise <- function(country="SE") {
-  return(get_IBA_file_country("samples_metadata_malaise", "raw", country = country))
+  return(get_IBA_file_country("samples_metadata_malaise", "raw", country = country, dec = "."))
 }
 
 #' Get the 'sites_metadata' files

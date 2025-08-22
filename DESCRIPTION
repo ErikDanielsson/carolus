@@ -1,8 +1,13 @@
 Package: carolus
 Type: Package
 Title: Handling metabarcoding data from the Swedish IBA and SIMS projects
-Version: 0.0.0dev
+Version: 1.0.0
 RoxygenNote: 7.3.2
 Suggests: 
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    tidyverse,
+    data.table,
+    dtplyr,
+    yaml,
+    fs,
 Config/testthat/edition: 3

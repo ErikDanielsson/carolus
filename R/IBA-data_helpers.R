@@ -7,13 +7,13 @@
 #' @param format The file ending. Defaults to 'tsv'
 #' @return A data frame of the file
 #' @export
-get_IBA_file_country <- function(fn_prefix, data_source, country = "SE", format="tsv") {
+get_IBA_file_country <- function(fn_prefix, data_source, country = "SE", format="tsv", ...) {
    # Check that the locality looks correct
   if (country != "SE" && country != "MG") {
     message(glue("Country code '{locality}' is invalid. Please pick either 'SE' or 'MG'")) 
     return(NA)
   }
-  return(get_IBA_data_file(fn_prefix, data_source, arguments = country, format = format))
+  return(get_IBA_data_file(fn_prefix, data_source, arguments = country, format = format, ...))
 }
 
 #' Get arrow table from a tabular file
@@ -25,7 +25,7 @@ get_IBA_file_country <- function(fn_prefix, data_source, country = "SE", format=
 #' @param format The file ending. Defaults to 'tsv'
 #' @return A data frame of the file
 #' @export
-get_IBA_data_file <- function(fn_prefix, data_source, arguments=NULL, format="tsv") {
+get_IBA_data_file <- function(fn_prefix, data_source, arguments=NULL, format="tsv", ...) {
   # Construct the file name
   if (!is.null(arguments)) {
     fn_prefix <- glue("{fn_prefix}_{arguments}") 
@@ -40,5 +40,5 @@ get_IBA_data_file <- function(fn_prefix, data_source, arguments=NULL, format="ts
   fn <- glue("{fn_prefix}.{format}")
   csv_fp <- path(carolus_dir("IBA", data_source), fn) 
   
-  return(get_arrow_file(csv_fp, data_source))
+  return(get_arrow_file(csv_fp, data_source, ...))
 }
