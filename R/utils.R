@@ -78,8 +78,8 @@ prompt_path <- function(message) {
 #' @param ... Keys in the config files to the path
 #' @return A path to the directory of interest
 #' @export
-carolus_dir <- function(..., config_file = "~/.carolus/config.yaml") {
-  cfg <- carolus_config(config_file)
+carolus_dir <- function(..., config_path = "~/.carolus/config.yaml") {
+  cfg <- carolus_config(config_path)
   keys <- list(...)
   val <- cfg
   for (k in keys) {

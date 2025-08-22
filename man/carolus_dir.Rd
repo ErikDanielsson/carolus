@@ -4,7 +4,7 @@
 \alias{carolus_dir}
 \title{Get a directory specified in the config file}
 \usage{
-carolus_dir(..., config_file = "~/.carolus/config.yaml")
+carolus_dir(..., config_path = "~/.carolus/config.yaml")
 }
 \arguments{
 \item{...}{Keys in the config files to the path}

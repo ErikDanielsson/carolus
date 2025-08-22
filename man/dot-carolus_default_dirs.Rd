@@ -5,7 +5,7 @@
 \alias{.carolus_default_dirs}
 \title{The default config file}
 \format{
-An object of class \code{list} of length 4.
+An object of class \code{list} of length 2.
 }
 \usage{
 .carolus_default_dirs
