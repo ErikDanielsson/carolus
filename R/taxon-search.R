@@ -1,10 +1,6 @@
-library(tidyverse)
-library(glue)
-library(fs)
-library(stringr)
 
 #' Search the dataset for a set of taxa
-#'
+#' 
 #' @param taxa A character vector containing the taxa of interest
 #' @param rank The rank of the taxa supplied
 #' @param treatment_type The treatment type of the sample: 'lysate', 'homogenate' or 'all'
@@ -12,13 +8,13 @@ library(stringr)
 #' @return A data frame containing the sample ids of the taxa with metadata
 #' @examples
 #' # Search for a single taxon 
-#' taxon_search(c("Trypoxylon attenuatum"), "Species")
+#' taxon_search("Trypoxylon attenuatum", "Species")
 #'
 #' # Search for a multiple taxa
 #' taxon_search(c("Astata", "Mellinus", "Trypoxylon"), "Genus")
 #'
 #' # Search for lysate samples
-#' taxon_search(c("Astata boops"), "Species", treatment_type = "lysate")
+#' taxon_search("Astata boops", "Species", treatment_type = "lysate")
 #' 
 #' @export
 taxon_search <- function(

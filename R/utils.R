@@ -25,6 +25,7 @@ library(yaml)
 carolus_config <- function(config_file = "~/.carolus/config.yaml") {
   if (!file.exists(config_file)) {
     dir.create(dirname(config_file), showWarnings = FALSE, recursive = TRUE)
+    message(glue("Creating config file in {dirname(config_file)}"))
     yaml::write_yaml(.carolus_default_dirs, config_file)
     message("Created default config at ", config_file)
   }
