@@ -65,8 +65,10 @@ taxon_search <- function(
   taxa_samples <- get_CO1_sequencing_metadata(country) %>%
     filter(sampleID_NGI %in% sampleIDs_and_counts$sampleID_NGI) %>%
     filter(dataset %in% treatment_cols) %>%
-    select(sampleID_FIELD, dataset) %>%
+    select(sampleID_FIELD, sampleID_NGI, dataset) %>%
     collect() 
+  
+  taxa_samples <- left_join(sampleIDs_and_counts, taxa_samples, by="sampleID_NGI")
   
   # Get the malaise metadata 
   mmc <- c("sampleID_FIELD", "trapID", "biomass_grams", "collecting_date", "sample_status")
