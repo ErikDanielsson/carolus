@@ -26,7 +26,16 @@ get_biomass_count <- function(dataset="IBA") {
 #' @return A data frame of the file
 #' @export
 get_CO1_asv_counts <- function(country="SE") {
-  return(get_IBA_file_country("CO1_asv_counts", "raw", country = country, format="tsv.gz"))
+  return(get_IBA_file_country(
+    "CO1_asv_counts",
+    "raw",
+    country = country,
+    format="tsv",
+    long=TRUE,
+    id_header_name="ASV_ID",
+    col_header_name="sampleID_NGI",
+    val_header_name="counts"
+  ))
 }
 
 # TODO: Implement ape function for:

@@ -56,21 +56,14 @@ taxon_search <- function(
     .$cluster
 
   # Get the cluster counts rows which contain the clusters of interest
-  taxa_cluster_rows <- get_cluster_counts(country) %>%
-    filter(cluster %in% taxa_clusters) 
+  sampleIDs_and_counts <- get_cluster_counts(country) %>%
+    filter(cluster %in% taxa_clusters) %>%
+    group_by(sampleID_NGI) %>%
+    summarise(total_counts = sum(counts, na.rm = TRUE))
 
-  # Get all columns except the cluster column
-  sample_ID_NGI_cols <- setdiff(names(taxa_cluster_rows), "cluster")
-
-  # Get NGI sample ids which had a positive number of hits
-  sample_ID_NGIs_logical <- taxa_cluster_rows %>%
-    summarise(across(all_of(sample_ID_NGI_cols), ~ any(. > 0, na.rm = TRUE))) %>%
-    collect()  # collect only the final 1-row result
-  sample_ID_NGIs <- names(sample_ID_NGIs_logical)[unlist(sample_ID_NGIs_logical)]
-  
   # Get the field sample ids corresponding to the NGI sample ids 
   taxa_samples <- get_CO1_sequencing_metadata(country) %>%
-    filter(sampleID_NGI %in% sample_ID_NGIs) %>%
+    filter(sampleID_NGI %in% sampleIDs_and_counts$sampleID_NGI) %>%
     filter(dataset %in% treatment_cols) %>%
     select(sampleID_FIELD, dataset) %>%
     collect() 

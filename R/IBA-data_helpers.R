@@ -7,13 +7,31 @@
 #' @param format The file ending. Defaults to 'tsv'
 #' @return A data frame of the file
 #' @export
-get_IBA_file_country <- function(fn_prefix, data_source, country = "SE", format="tsv", ...) {
+get_IBA_file_country <- function(
+    fn_prefix,
+    data_source,
+    country = "SE",
+    format="tsv",
+    long=FALSE, 
+    col_header_name=NULL,
+    val_header_name=NULL,
+    ...
+) {
    # Check that the locality looks correct
   if (country != "SE" && country != "MG") {
     message(glue("Country code '{locality}' is invalid. Please pick either 'SE' or 'MG'")) 
     return(NA)
   }
-  return(get_IBA_data_file(fn_prefix, data_source, arguments = country, format = format, ...))
+  return(get_IBA_data_file(
+    fn_prefix,
+    data_source,
+    arguments = country,
+    format = format,
+    long = long,
+    col_header_name = col_header_name,
+    val_header_name = val_header_name,
+    ...
+  ))
 }
 
 #' Get arrow table from a tabular file
@@ -25,7 +43,17 @@ get_IBA_file_country <- function(fn_prefix, data_source, country = "SE", format=
 #' @param format The file ending. Defaults to 'tsv'
 #' @return A data frame of the file
 #' @export
-get_IBA_data_file <- function(fn_prefix, data_source, arguments=NULL, format="tsv", ...) {
+get_IBA_data_file <- function(
+  fn_prefix,
+  data_source,
+  arguments=NULL,
+  format="tsv",
+  long=FALSE,
+  id_header_name=NULL,
+  col_header_name=NULL,
+  val_header_name=NULL,
+  ...
+) {
   # Construct the file name
   if (!is.null(arguments)) {
     fn_prefix <- glue("{fn_prefix}_{arguments}") 
@@ -38,7 +66,25 @@ get_IBA_data_file <- function(fn_prefix, data_source, arguments=NULL, format="ts
   
   # Construct the file name and path 
   fn <- glue("{fn_prefix}.{format}")
-  csv_fp <- path(carolus_dir("data", "IBA", data_source), fn) 
+  dirname <- carolus_dir("data", "IBA", data_source)
+  csv_fp <- path(dirname, fn) 
+  if (!file.exists(csv_fp)) {
+    format <- glue("{format}.gz")
+    fn <- glue("{fn_prefix}.{format}")
+    csv_fp <- path(dirname, fn)    
+  }
+  if (!file.exists(csv_fp)) {
+    message("Could not find unzipped or gzipped file. Aborting")
+  }
+  
+  if (long) {
+    message("File is long")
+     csv_fp <- make_file_long(
+       csv_fp, dirname, id_header_name, col_header_name, val_header_name
+     )
+  } else {
+    message("File is not long")
+  }
   
   return(get_arrow_file(csv_fp, data_source, ...))
 }

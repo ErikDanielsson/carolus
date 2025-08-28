@@ -1,12 +1,17 @@
+library(reticulate)
 
-# Set up an enviroment so that we can cache the file loads
+# Set up an environment so that we can cache the file loads
 pkg.env <- new.env()
 pkg.env$loaded_files <- list()
 
-get_arrow_file <- function(csv_fp, cache_relpath, group_by, format="tsv", ...) {
+get_arrow_file <- function(
+    csv_fp,
+    group_by,
+    format="tsv",
+    ...
+  ) {
   
   fn <- path_file(csv_fp) 
-  pq_fp <- path(carolus_dir("cache"), cache_relpath, fn)
   
   if (fn %in% names(pkg.env$loaded_files)) {
     message(glue("Returning cached {fn}"))
@@ -14,30 +19,30 @@ get_arrow_file <- function(csv_fp, cache_relpath, group_by, format="tsv", ...) {
   } else {
     message(glue("Loading file {fn}"))
   }
+  message(csv_fp)
+  data <- fread(csv_fp, ...)
+  pkg.env$loaded_files[[fn]] <- data
+  return(data)     
+}
+
+make_file_long <- function(
+  csv_fp, relpath, id_header_name, col_header_name, val_header_name
+) {
+  # Construct the out file name
+  fn <- path_file(csv_fp) 
+  out_fp <- path(relpath, glue("long_{fn}"))
+  message(glue("Out file path {out_fp}"))
   
-  if (file.exists(pq_fp)) {
-    # Read the cached parquet file
-    data <- open_dataset(
-      sources = pq_fp,
-      format = "parquet"
-    )
-    pkg.evn$loaded_files[[fn]] <- data
-    return(data)
+  # Check if we need to convert the file
+  if (!file.exists(out_fp)) {
+    reticulate::source_python(
+      system.file("python", "wide_to_long_tsv.py", package="carolus")
+    ) 
+    message(glue("Converting wide file '{csv_fp}' into long file '{out_fp}'"))
+    wide_to_long_tsv(csv_fp, out_fp, id_header_name, col_header_name, val_header_name)  
   } else {
-    # Read the downloaded CSV file
-    # data <- open_dataset(
-    #   sources = csv_fp,
-    #   col_types = schema(ISBN = string()),
-    #   format = format
-    # )
-    data <- fread(csv_fp, ...)
-    pkg.env$loaded_files[[fn]] <- data
-    
-    # TODO: Create a parquet file in the cache directory  
-    # message(glue("Creating parquet file for {fn} at {pq_fp}"))
-    # data |> write_dataset(path = pq_fp, format = "parquet")
-    
-    return(data)     
+    message("File already converted to long")
   }
+  return(out_fp)
 }
 

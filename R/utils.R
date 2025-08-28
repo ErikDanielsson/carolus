@@ -12,7 +12,7 @@ library(yaml)
       processed = NULL
     )
   ),
-  cache  = tools::R_user_dir("carolus", which = "cache")
+  cache  = path(path_home(), ".carolus", "cache")
 )
 
 #' Check that the carolus config exists. Create it otherwise
@@ -46,6 +46,7 @@ carolus_config <- function(config_path = "~/.carolus/config.yaml") {
 
 create_carolus_config <- function(config_path = "~/.carolus/config.yaml") {
     dir.create(dirname(config_path), showWarnings = FALSE, recursive = TRUE)
+    dir.create(.carolus_default_dirs$cache, showWarnings = FALSE, recursive = TRUE)
     message(glue("Creating config file in {dirname(config_path)}"))
     raw_dir <- prompt_path("Enter the path to the raw IBA data")
     message(glue("Entered raw data dir '{raw_dir}' in config")) 
