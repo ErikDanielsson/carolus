@@ -91,3 +91,16 @@ carolus_dir <- function(..., config_path = "~/.carolus/config.yaml") {
   }
   val
 } 
+
+#' Configure the python virtual environment to use
+#'
+#' Uses a venv called "carolus" by default. Installs pandas if not present
+#' in the venv
+#' @param envname The name of the venv, "carolus" by default
+#' @export
+configure_python <- function() {
+  if (!reticulate::py_module_available("pandas")) {
+    message("Installing Python dependencies into reticulate")
+    reticulate::py_install("pandas")
+  }
+}

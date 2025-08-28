@@ -3,12 +3,13 @@ Type: Package
 Title: Handling metabarcoding data from the Swedish IBA and SIMS projects
 Version: 1.0.0
 RoxygenNote: 7.3.2
-Imports: tidyverse, data.table, dtplyr, yaml, fs, stringr
+Imports: tidyverse, data.table, dtplyr, yaml, fs, stringr, reticulate
 Suggests: 
     testthat (>= 3.0.0),
     tidyverse,
     data.table,
     dtplyr,
     yaml,
-    fs
+    fs,
+    reticulate
 Config/testthat/edition: 3

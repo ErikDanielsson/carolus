@@ -22,13 +22,19 @@ containing raw amplicon sequence variants and a
 containing processed data.
 For more details on the data see the [Nature data paper](https://doi.org/10.1038/s41597-025-05151-0).
 
-With the data available and `carolus` install, run
+With the data available and `carolus` installed, run
 ```R
 library(carolus)
 configure_carolus()
 ```
 This command will help you create a config file which contain the paths of the downloaded data.
 This config file is used by `carolus` to locate files in the datasets.
+
+Next, run 
+```R
+configure_python()
+```
+to install the Python dependencies of the package (only `pandas` at the moment).
 
 At the moment, `carolus` only supports a single function: `taxon_search`.
 Test it out with
