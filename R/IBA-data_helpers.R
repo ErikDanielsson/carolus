@@ -49,6 +49,7 @@ get_IBA_data_file <- function(
   arguments=NULL,
   format="tsv",
   long=FALSE,
+  id_header_name=NULL,
   col_header_name=NULL,
   val_header_name=NULL,
   ...
@@ -65,12 +66,21 @@ get_IBA_data_file <- function(
   
   # Construct the file name and path 
   fn <- glue("{fn_prefix}.{format}")
-  csv_fp <- path(carolus_dir("data", "IBA", data_source), fn) 
+  dirname <- carolus_dir("data", "IBA", data_source)
+  csv_fp <- path(dirname, fn) 
+  if (!file.exists(csv_fp)) {
+    format <- glue("{format}.gz")
+    fn <- glue("{fn_prefix}.{format}")
+    csv_fp <- path(dirname, fn)    
+  }
+  if (!file.exists(csv_fp)) {
+    message("Could not find unzipped or gzipped file. Aborting")
+  }
   
   if (long) {
     message("File is long")
      csv_fp <- make_file_long(
-       csv_fp, data_source, col_header_name, val_header_name
+       csv_fp, dirname, id_header_name, col_header_name, val_header_name
      )
   } else {
     message("File is not long")

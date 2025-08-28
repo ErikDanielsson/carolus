@@ -30,8 +30,9 @@ get_CO1_asv_counts <- function(country="SE") {
     "CO1_asv_counts",
     "raw",
     country = country,
-    format="tsv.gz",
+    format="tsv",
     long=TRUE,
+    id_header_name="ASV_ID",
     col_header_name="sampleID_NGI",
     val_header_name="counts"
   ))
