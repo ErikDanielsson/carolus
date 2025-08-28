@@ -5,19 +5,13 @@
 \title{Get the 'cluster_counts' files}
 \usage{
 get_cluster_counts(country = "SE")
-
-get_cluster_counts(country = "SE")
 }
 \arguments{
 \item{country}{The country code. Either 'SE' or 'MG', defaults to 'SE'}
 }
 \value{
 A data frame of the file
-
-A data frame of the file
 }
 \description{
-Get the 'cluster_counts' files
-
 Get the 'cluster_counts' files
 }
